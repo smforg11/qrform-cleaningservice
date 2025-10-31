@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbyehbJwCkv9ABijG35OPWB3mPiVlBgzxZaTOOqaV__rYHNtVU2GYXY7EGhfIGNDMzLcaw/exec'
+  'https://script.google.com/macros/s/AKfycbzwvSrKaCPw1kvD0ENwUpuGzLZRULOvJAxHVK7uoDN3UMQtavFasHfuaUgiU0FZebnj-w/exec'
 
 export default defineConfig({
   plugins: [react()],
