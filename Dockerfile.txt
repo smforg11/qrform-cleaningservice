@@ -1,0 +1,16 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package.json dan install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy seluruh project
+COPY . .
+
+# Expose port dev server Vite
+EXPOSE 5173
+
+# Jalankan server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
