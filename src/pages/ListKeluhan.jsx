@@ -50,7 +50,7 @@ export default function ListKeluhan() {
   };
 
   const handleSelesai = async (timestamp) => {
-    setLoadingSelesai(timestamp); // ⬅️ mulai loading
+    setLoadingSelesai(timestamp); 
     try {
       const res = await fetch("/api", {
         method: "POST",
@@ -141,7 +141,7 @@ export default function ListKeluhan() {
                 <Card sx={{ borderRadius: 3, boxShadow: 3, overflow: "hidden" }}>
                   <CardContent>
                     <Typography variant="subtitle1" fontWeight="bold" color="error.main">
-                      {item.Area || item.area || "Area Tidak Dikenal"}
+                      {item.Barcode || item.barcode || "Area Tidak Dikenal"}
                     </Typography>
                     <Typography variant="body2" sx={{ mt: 0.5 }}>
                       <b>Pelapor:</b> {item.Petugas || item.petugas || "-"}
