@@ -264,8 +264,10 @@ export default function HalamanAwal() {
         <DialogTitle sx={{
           fontSize: 16,         
           textAlign: "center",  
-          pb: 1,                
-          }}>Silahkan Masukan Password</DialogTitle>
+          pb: 1,
+          fontWeight: "bold",
+          color: "text.secondary",                
+          }}>Input Password</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth
