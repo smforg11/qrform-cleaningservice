@@ -18,31 +18,31 @@ export default function InstruksiPemakaian() {
 
   return (
     <Box
-      sx={{
-        width: "100vw",
-        minHeight: "100vh",
-        bgcolor: "#fafafa",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        py: 4,
-      }}
-    >
-      {/* Logo dan Judul */}
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          bgcolor: "#f3f4f6",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+    
       <motion.img
         src="/logo.png"
         alt="Logo"
-        style={{ width: 120, marginBottom: 20 }}
+        style={{ width: 140, marginTop: 50 }}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       />
 
-      <Typography variant="h5" fontWeight="bold" color="text.primary" sx={{ mb: 3 }}>
+      <Typography variant="h5" fontWeight="bold" color="text.secondary" sx={{ mt:3,mb: 3 }}>
         Instruksi Pemakaian Sistem
       </Typography>
 
-      {/* Card Petugas Kebersihan */}
+    
       <Card
         sx={{
           width: "90%",
