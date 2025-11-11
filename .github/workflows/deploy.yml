@@ -11,7 +11,10 @@ jobs:
     steps:
       - name: Pull latest code
         run: |
-          cd /opt/production-app   # <-- ubah ke folder repo kamu di server
+          cd /opt/production-app 
           git reset --hard
           git pull origin main
+          docker compose down
+          docker compose up -d
+
           echo "✅ Git pull sukses di $(hostname)"
