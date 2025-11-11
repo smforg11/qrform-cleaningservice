@@ -39,7 +39,7 @@ export default function InstruksiPemakaian() {
       />
 
       <Typography variant="h5" fontWeight="bold" color="text.primary" sx={{ mb: 3 }}>
-        Instruksi Pemakaian Sistem
+        Instruksi Pemakaian Sistem QR Cleaning Service
       </Typography>
 
       {/* Card Petugas Kebersihan */}
