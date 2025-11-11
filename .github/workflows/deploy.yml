@@ -1,0 +1,17 @@
+name: Auto Deploy (git pull on server)
+
+on:
+  push:
+    branches:
+      - main    
+
+jobs:
+  deploy:
+    runs-on: self-hosted   
+    steps:
+      - name: Pull latest code
+        run: |
+          cd /opt/production-app   # <-- ubah ke folder repo kamu di server
+          git reset --hard
+          git pull origin main
+          echo "✅ Git pull sukses di $(hostname)"
