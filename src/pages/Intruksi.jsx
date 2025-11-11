@@ -39,7 +39,7 @@ export default function InstruksiPemakaian() {
       />
 
       <Typography variant="h5" fontWeight="bold" color="text.secondary" sx={{ mt:3,mb: 3 }}>
-        Instruksi Pemakaian Sistem QR
+        Instruksi Sistem QR Cleaning
       </Typography>
 
     
@@ -92,8 +92,7 @@ export default function InstruksiPemakaian() {
 
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
             Pilih menu <b>Laporkan Keluhan </b>Lalu Scan area untuk melaporkan kendala atau kerusakan di area
-            kerja. Isi informasi nama pelapor dan deskripsi keluhan dengan
-            jelas.
+            kerja. Isi informasi nama pelapor dan deskripsi keluhan dengan jelas.
           </Typography>
 
           <Typography variant="body2" color="text.secondary">

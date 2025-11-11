@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Pull latest code
         run: |
-          cd  cd project-live/qrform-cleaningservice 
+          cd project-live/qrform-cleaningservice 
           git reset --hard
           git pull origin main
           docker compose down
