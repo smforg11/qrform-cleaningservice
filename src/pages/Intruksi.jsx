@@ -91,7 +91,7 @@ export default function InstruksiPemakaian() {
           </Box>
 
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
-            Pilih menu <b>Lapor Keluhan </b>Lalu  Scan area untuk melaporkan kendala atau kerusakan di area
+            Pilih menu <b>Laporkan Keluhan </b>Lalu Scan area untuk melaporkan kendala atau kerusakan di area
             kerja. Isi informasi nama pelapor dan deskripsi keluhan dengan
             jelas.
           </Typography>
