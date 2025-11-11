@@ -63,7 +63,7 @@ export default function InstruksiPemakaian() {
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
             Gunakan menu <b>Petugas Kebersihan</b> untuk melakukan pengecekan area dengan
             memindai <b>QR Code</b> yang tersedia. Setelah QR terbaca, isi form kondisi area,
-            catatan tambahan jika ada, lalu tekan <b>Kirim</b> untuk menyimpan hasil.
+            catatan tambahan jika ada, lalu tekan <b>Kirim</b> untuk mengirim hasil.
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
