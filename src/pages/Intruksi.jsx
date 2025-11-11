@@ -39,7 +39,7 @@ export default function InstruksiPemakaian() {
       />
 
       <Typography variant="h5" fontWeight="bold" color="text.secondary" sx={{ mt:3,mb: 3 }}>
-        Instruksi Pemakaian Sistem
+        Instruksi Pemakaian Sistem QR
       </Typography>
 
     
