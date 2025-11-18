@@ -132,6 +132,7 @@ export default function HalamanAwal() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       />
+      
 
       <Box
         sx={{
@@ -146,7 +147,7 @@ export default function HalamanAwal() {
           variant="h6"
           fontWeight="bold"
           color="text.secondary"
-          sx={{ mt: 3, mb: 3, letterSpacing: 0.5 }}
+          sx={{ mt: 6, mb: 3, letterSpacing: 0.5 }}
         >
           {menu === "utama" ? "System QR Cleaning" : "Form Kebersihan"}
         </Typography>
@@ -222,18 +223,8 @@ export default function HalamanAwal() {
             );
           })}
         </Grid>
-      </Box>
-
-    {menu !== "utama" && (
-        <Box
-          sx={{
-            mt: "auto",
-            mb: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+      </Box>   
+        {menu !== "utama" && (
           <Button
             variant="outlined"
             color="error"
@@ -243,12 +234,22 @@ export default function HalamanAwal() {
               textTransform: "none",
               px: 3,
               mb: 3,
-              mt: 3, 
+              mt: 4,
             }}
           >
             Logout
           </Button>
+        )}
 
+        <Box
+          sx={{
+            mt: "auto",
+            mb: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Typography
             variant="body2"
             color="text.secondary"
@@ -257,7 +258,7 @@ export default function HalamanAwal() {
             © {new Date().getFullYear()} | PT Sarana Mega Fortuna
           </Typography>
         </Box>
-      )}
+
 
       
      <Dialog open={openPassword} onClose={() => setOpenPassword(false)}>
@@ -265,7 +266,7 @@ export default function HalamanAwal() {
           fontSize: 16,         
           textAlign: "center",  
           pb: 1,                
-          }}>Silahkan Masukan Password</DialogTitle>
+          }}>Password</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth

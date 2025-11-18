@@ -3,7 +3,10 @@ name: Auto Deploy (git pull on server)
 on:
   push:
     branches:
-      - main    
+      - main  
+    
+  schedule:
+    - cron: "0 15 * * *"  
 
 jobs:
   deploy:
