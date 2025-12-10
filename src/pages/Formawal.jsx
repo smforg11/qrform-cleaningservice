@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ChatWidget from "./ChatWidget";
 import {
   Box,
   Grid,
@@ -319,7 +320,7 @@ export default function HalamanAwal() {
         </DialogActions>
       </Dialog>
 
-
+  <ChatWidget />
     </Box>
   );
 }
