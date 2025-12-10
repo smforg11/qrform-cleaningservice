@@ -28,7 +28,7 @@ export default function ChatWidget() {
 
     try {
       const res = await fetch(
-        "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
+       "/api-n8n",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

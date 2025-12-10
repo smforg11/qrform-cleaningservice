@@ -16,6 +16,12 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
+      "/api-n8n": {
+        target: "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api-n8n/, ""),
+      },
     },
   },
    rollupOptions: {
