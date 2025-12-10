@@ -51,6 +51,26 @@ export default function ChatWidget() {
     }
   };
 
+  function parseMessage(text) {
+  if (!text) return "";
+
+  // escape HTML untuk aman
+  text = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+  // ganti **bold** jadi <strong>
+  text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  // ganti line break
+  text = text.replace(/\n/g, "<br>");
+
+  return text;
+}
+
   return (
     <>
       {/* Chat Bubble */}
@@ -111,20 +131,21 @@ export default function ChatWidget() {
                 mb: 1,
               }}
             >
-              <Box
-                sx={{
-                  px: 1.5,
-                  py: 1,
-                  borderRadius: 2,
-                  maxWidth: "80%",
-                  bgcolor: msg.sender === "user" ? "#FF8C00" : "#e0e0e0",
-                  color: msg.sender === "user" ? "white" : "black",
-                  whiteSpace: "pre-line",
-                  fontSize: 14,
-                }}
-              >
-                {msg.text}
-              </Box>
+             <Box
+              sx={{
+                px: 1.5,
+                py: 1,
+                borderRadius: 2,
+                maxWidth: "80%",
+                bgcolor: msg.sender === "user" ? "#FF8C00" : "#e0e0e0",
+                color: msg.sender === "user" ? "white" : "black",
+                fontSize: 14,
+              }}
+              dangerouslySetInnerHTML={{
+                __html: msg.sender === "bot" ? parseMessage(msg.text) : msg.text
+              }}
+            />
+
             </Box>
           ))}
           <div ref={messagesEndRef} />
