@@ -26,15 +26,13 @@ export default function ChatWidget() {
     setInput("");
     appendMessage("user", text);
 
-    try {
-      const res = await fetch(
-        "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text }),
-        }
-      );
+      try {
+      const res = await fetch("/api-n8n", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text }),
+      });
+
 
       const data = await res.json();
       let botMessage = "Tidak ada balasan";
