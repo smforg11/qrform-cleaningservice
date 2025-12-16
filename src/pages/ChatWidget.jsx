@@ -11,7 +11,7 @@ export default function ChatWidget() {
   const toggleChat = () => setOpen(!open);
 
   const appendMessage = (sender, text) => {
-    setMessages((prev) => [...prev, { sender, text }]);
+    setMessages((prev) => [...prev, { sender, text, timestamp: Date.now(),}]);
   };
 
   useEffect(() => {
@@ -19,6 +19,7 @@ export default function ChatWidget() {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+  
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -31,7 +32,10 @@ export default function ChatWidget() {
        "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Basic ${btoa("itdev:sukroy@12345")}`
+          },
           body: JSON.stringify({ message: text }),
         }
       );
@@ -54,7 +58,6 @@ export default function ChatWidget() {
   function parseMessage(text) {
   if (!text) return "";
 
-  // escape HTML untuk aman
   text = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -62,10 +65,8 @@ export default function ChatWidget() {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 
-  // ganti **bold** jadi <strong>
   text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-  // ganti line break
   text = text.replace(/\n/g, "<br>");
 
   return text;
@@ -116,10 +117,9 @@ export default function ChatWidget() {
         {/* Header */}
         <Box sx={{ bgcolor: "#FF8C00", color: "white", p: 1.2, textAlign: "center" }}>
           <Typography variant="subtitle1" fontWeight={600}>
-            Assistant SMF
+            Assistant SMF 
           </Typography>
         </Box>
-
         {/* Messages */}
         <Box sx={{ flex: 1, p: 1.5, overflowY: "auto", bgcolor: "#fafafa" }}>
           {messages.map((msg, i) => (
@@ -127,29 +127,45 @@ export default function ChatWidget() {
               key={i}
               sx={{
                 display: "flex",
-                justifyContent: msg.sender === "user" ? "flex-end" : "flex-start",
+                flexDirection: "column", // ⬅️ PENTING
+                alignItems: msg.sender === "user" ? "flex-end" : "flex-start",
                 mb: 1,
               }}
             >
-             <Box
-              sx={{
-                px: 1.5,
-                py: 1,
-                borderRadius: 2,
-                maxWidth: "80%",
-                bgcolor: msg.sender === "user" ? "#FF8C00" : "#e0e0e0",
-                color: msg.sender === "user" ? "white" : "black",
-                fontSize: 14,
-              }}
-              dangerouslySetInnerHTML={{
-                __html: msg.sender === "bot" ? parseMessage(msg.text) : msg.text
-              }}
-            />
+              {/* Bubble */}
+              <Box
+                sx={{
+                  px: 1.5,
+                  py: 1,
+                  borderRadius: 2,
+                  maxWidth: "80%",
+                  bgcolor: msg.sender === "user" ? "#FF8C00" : "#e0e0e0",
+                  color: msg.sender === "user" ? "white" : "black",
+                  fontSize: 14,
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: msg.sender === "bot" ? parseMessage(msg.text) : msg.text
+                }}
+              />
 
+              {/* Timestamp */}
+              <Box
+                sx={{
+                  fontSize: 10,
+                  color: "gray",
+                  mt: 0.3,
+                }}
+              >
+                {new Date(msg.timestamp).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </Box>
             </Box>
           ))}
           <div ref={messagesEndRef} />
         </Box>
+
 
         {/* Input */}
         <Box sx={{ display: "flex", borderTop: "1px solid #ddd", p: 1 }}>
