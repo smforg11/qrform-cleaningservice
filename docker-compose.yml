@@ -1,10 +1,9 @@
+version: "3.9"
 
 services:
-  reactapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: react_nginx
+  frontend:
+    container_name: react-vite-dev
+    build: .
     ports:
-      - "8084:80"
-    restart: always
+      - "5173:5173"
+    restart: unless-stopped
