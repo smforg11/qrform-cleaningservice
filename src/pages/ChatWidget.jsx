@@ -7,6 +7,7 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
 
   const toggleChat = () => setOpen(!open);
 
@@ -26,7 +27,7 @@ export default function ChatWidget() {
     const text = input;
     setInput("");
     appendMessage("user", text);
-
+    setIsTyping(true);
     try {
       const res = await fetch(
        "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
@@ -53,6 +54,9 @@ export default function ChatWidget() {
     } catch (e) {
       appendMessage("bot", "Menunggu balasan");
     }
+    finally {
+    setIsTyping(false); 
+  }
   };
 
   function parseMessage(text) {
@@ -163,6 +167,36 @@ export default function ChatWidget() {
               </Box>
             </Box>
           ))}
+          {isTyping && (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                mb: 1,
+              }}
+            >
+              <Box
+                sx={{
+                  px: 1.5,
+                  py: 1,
+                  borderRadius: 2,
+                  bgcolor: "#e0e0e0",
+                  fontSize: 14,
+                  display: "flex",
+                  gap: 0.5,
+                }}
+              >
+                <span className="dot">•</span>
+                <span className="dot">•</span>
+                <span className="dot">•</span>
+              </Box>
+              <Box sx={{ fontSize: 10, color: "gray", mt: 0.3 }}>
+                sedang mengetik…
+              </Box>
+            </Box>
+          )}
+
           <div ref={messagesEndRef} />
         </Box>
 
