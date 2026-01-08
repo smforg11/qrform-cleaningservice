@@ -82,20 +82,22 @@ export default function ChatWidget() {
       <IconButton
         onClick={toggleChat}
         sx={{
-          position: "fixed",
-          bottom: 24,
-          right: 24,
-          width: 56,
-          height: 56,
-          bgcolor: "#FF8C00",
-          color: "white",
-          boxShadow: 4,
-          zIndex: 9999,
-          border: "4px solid #FFC45A",
-          ":hover": { bgcolor: "#e67e00" },
-        }}
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            cursor: "pointer",
+            zIndex: 9999,
+            "&:hover": { transform: "scale(1.05)" },
+          }}
       >
-        <ChatBubbleIcon fontSize="large" />
+        <img
+          src="/cs.png"
+         
+          style={{
+            width: 150,  
+            height: "auto",
+          }}
+        />
       </IconButton>
 
       {/* Chat Box */}
@@ -103,10 +105,10 @@ export default function ChatWidget() {
         elevation={6}
         sx={{
           position: "fixed",
-          bottom: 90,
+          bottom: 150,
           right: 24,
-          width: 320,
-          height: 380,
+          width: 350,
+          height: 500,
           display: "flex",
           flexDirection: "column",
           borderRadius: 3,
