@@ -1,19 +1,46 @@
-name: Auto Deploy (git pull on server)
+name: Auto Deploy zero time
 
 on:
   push:
     branches:
-      - main  
+      - main
+
 jobs:
   deploy:
-    runs-on: self-hosted   
+    runs-on: self-hosted
     steps:
-      - name: Pull latest code
+      - name: Set variables
         run: |
-          cd /home/itdev/project-live/qrform-cleaningservice 
-          git reset --hard
-          git pull origin main
-          docker compose down
-          docker compose up -d
+           PROJECT_DIR=/home/itdev/project-live/qrform-cleaningservice
+           RELEASE_DIR=$PROJECT_DIR/releases
+           TIMESTAMP=$(date + "%Y%m%d%H%M%S")
+           NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
+           echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+           echo "RELEASES_DIR=$RELEASE_DIR" >> $GITHUB-ENV
+           echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
 
-          echo "✅ Git pull sukses di $(hostname)"
+      - name: Create Folder
+        run: |
+          mkdir -p $NEW_RELEASE
+          cd $NEW_RELEASE
+          git clone --branch main https://github.com/username/qrform-cleaningservice.git .
+          git reset --hard
+      - name: Build Docker
+        run: |
+          cd $NEW_RELEASE
+          docker compose build
+          docker compose up -d
+      - name: Update symlink
+        run: |
+          ln -sfn $NEW_RELEASE $PROJECT_DIR/current
+          echo "new release deploy: $NEW_RELEASE"
+      - name: 
+        run: |
+          cd $RELEASE_DIR
+          ls -1tr | head -n -5 | xargs -d '\n' rm -rf || true
+          echo "release lama hapus"
+          
+          
+          
+        
+      
