@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main  
-    
-  schedule:
-    - cron: "0 15 * * *"  
-
 jobs:
   deploy:
     runs-on: self-hosted   
