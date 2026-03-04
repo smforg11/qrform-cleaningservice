@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Set variables
         run: |
-           PROJECT_DIR=/home/itdev/qrform-cleaningservice
+           PROJECT_DIR=/home/itdev/qrform
            RELEASE_DIR=$PROJECT_DIR/releases
            TIMESTAMP=$(date + "%Y%m%d%H%M%S")
            NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
