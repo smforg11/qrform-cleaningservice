@@ -133,6 +133,16 @@ export default function HalamanAwal() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       />
+
+      <motion.img
+        src="/image.png"
+        alt="Logo"
+        style={{ width: 240, marginTop: 50 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      />
+      
       
 
       <Box
