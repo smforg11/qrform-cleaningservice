@@ -1,4 +1,4 @@
-name: Auto Deploy zero time
+name: Auto Deploy Zero Downtime
 
 on:
   push:
@@ -8,39 +8,44 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
+      - uses: actions/checkout@v4
+
       - name: Set variables
         run: |
-           PROJECT_DIR=/home/itdev/qrform
-           RELEASE_DIR=$PROJECT_DIR/releases
-           TIMESTAMP=$(date + "%Y%m%d%H%M%S")
-           NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
-           echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
-           echo "RELEASES_DIR=$RELEASE_DIR" >> $GITHUB-ENV
-           echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
+          PROJECT_DIR=/home/itdev/qrform
+          RELEASES_DIR=$PROJECT_DIR/releases
+          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+          NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
 
-      - name: Create Folder
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+          echo "RELEASES_DIR=$RELEASES_DIR" >> $GITHUB_ENV
+          echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
+
+      - name: Create release folder
         run: |
           mkdir -p $NEW_RELEASE
-          cd $NEW_RELEASE
-          git clone --branch main https://github.com/username/qrform-cleaningservice.git .
-          git reset --hard
-      - name: Build Docker
+          rsync -a --exclude='.git' ./ $NEW_RELEASE/
+
+      - name: Build Docker Image
         run: |
           cd $NEW_RELEASE
           docker compose build
-          docker compose up -d
-      - name: Update symlink
+
+      - name: Switch Symlink
         run: |
           ln -sfn $NEW_RELEASE $PROJECT_DIR/current
-          echo "new release deploy: $NEW_RELEASE"
-      - name: 
+
+      - name: Restart Container
         run: |
-          cd $RELEASE_DIR
-          ls -1tr | head -n -5 | xargs -d '\n' rm -rf || true
-          echo "release lama hapus"
-          
-          
+          cd $PROJECT_DIR/current
+          docker compose up -d
+
+      - name: Cleanup old releases
+        run: |
+          cd $RELEASES_DIR
+          ls -1dt */ | tail -n +6 | xargs rm -rf || true
           
         
       
