@@ -13,7 +13,7 @@ jobs:
         run: |
            PROJECT_DIR=/home/itdev/qrform
            RELEASE_DIR=$PROJECT_DIR/releases
-           TIMESTAMP=$(date + "%Y%m%d%H%M%S")
+           TIMESTAMP=$(date +"%Y%m%d%H%M%S")
            NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
            echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
            echo "RELEASES_DIR=$RELEASE_DIR" >> $GITHUB-ENV
