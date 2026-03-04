@@ -11,13 +11,13 @@ jobs:
     steps:
       - name: Set variables
         run: |
-           PROJECT_DIR=/home/itdev/qrform
-           RELEASE_DIR=$PROJECT_DIR/releases
-           TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-           NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
-           echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
-           echo "RELEASES_DIR=$RELEASE_DIR" >> $GITHUB-ENV
-           echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
+          PROJECT_DIR=/home/itdev/qrform
+          RELEASES_DIR=$PROJECT_DIR/releases
+          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+          NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+          echo "RELEASES_DIR=$RELEASES_DIR" >> $GITHUB_ENV
+          echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
 
       - name: Create Folder
         run: |
