@@ -133,15 +133,6 @@ export default function HalamanAwal() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       />
-
-       <motion.img
-        src="/image.png"
-        alt="Logo"
-        style={{ width: 240, marginTop: 50 }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      />
       <Box
         sx={{
           textAlign: "center",
@@ -157,7 +148,7 @@ export default function HalamanAwal() {
           color="text.secondary"
           sx={{ mt: 6, mb: 3, letterSpacing: 0.5 }}
         >
-          {menu === "utama" ? "System QR Cleaning" : "Form Kebersihan"}
+          {menu === "utama" ? "System QR Cleaning Service " : "Form Kebersihan"}
         </Typography>
 
         <Grid container spacing={3} justifyContent="center" alignItems="stretch">
