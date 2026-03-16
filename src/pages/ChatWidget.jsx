@@ -121,11 +121,39 @@ export default function ChatWidget() {
         }}
       >
         {/* Header */}
-        <Box sx={{ bgcolor: "#FF8C00", color: "white", p: 1.2, textAlign: "center" }}>
-          <Typography variant="subtitle1" fontWeight={600}>
-            Assistant SMF 
-          </Typography>
-        </Box>
+       <Box
+            sx={{
+              background: "linear-gradient(135deg, #FF8C00 0%, #FF6A00 100%)",
+              color: "white",
+              px: 2,
+              py: 1.5,
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              borderTopLeftRadius: 12,
+              borderTopRightRadius: 12,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
+            }}
+          >
+            <img
+              src="/cs.png"
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: "50%"
+              }}
+            />
+
+            <Typography
+              variant="subtitle1"
+              sx={{
+                fontWeight: 600,
+                letterSpacing: 0.3
+              }}
+            >
+              Assistant SMF
+            </Typography>
+          </Box>
         {/* Messages */}
         <Box sx={{ flex: 1, p: 1.5, overflowY: "auto", bgcolor: "#fafafa" }}>
           {messages.map((msg, i) => (
