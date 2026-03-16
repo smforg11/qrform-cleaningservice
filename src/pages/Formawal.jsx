@@ -134,9 +134,14 @@ export default function HalamanAwal() {
         transition={{ duration: 0.6 }}
       />
 
-  
-      
-
+       <motion.img
+        src="/image.png"
+        alt="Logo"
+        style={{ width: 240, marginTop: 50 }}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      />
       <Box
         sx={{
           textAlign: "center",
@@ -243,15 +248,7 @@ export default function HalamanAwal() {
             Logout
           </Button>
         )}
-    <motion.img
-        src="/image.png"
-        alt="Logo"
-        style={{ width: 240, marginTop: 50 }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      />
-      
+   
         <Box
           sx={{
             mt: "auto",
