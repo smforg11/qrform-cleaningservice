@@ -31,7 +31,8 @@ jobs:
       - name: Build Docker Image
         run: |
           cd $NEW_RELEASE
-          docker compose build
+          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
+          docker build -t frontend:$TIMESTAMP -t frontend:latest .
 
       - name: Switch Symlink
         run: |
@@ -40,7 +41,7 @@ jobs:
       - name: Restart Container
         run: |
           cd $PROJECT_DIR/current
-          docker compose up -d
+          docker compose up -d --force-recreate
 
       - name: Cleanup old releases
         run: |
