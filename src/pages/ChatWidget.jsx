@@ -151,7 +151,7 @@ export default function ChatWidget() {
                 letterSpacing: 0.3
               }}
             >
-              Assistant AI KEBERSIHAN SMF
+              Assistant AI KEBERSIHANn SMF
             </Typography>
           </Box>
         {/* Messages */}
