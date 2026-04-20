@@ -1,4 +1,4 @@
-name: Auto Deploy React
+name: Auto Deploy Zero Downtime
 
 on:
   push:
