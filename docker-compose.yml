@@ -12,7 +12,7 @@ services:
     container_name: nginx_proxy
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "8085:80"
     volumes:
       - /home/itdev/qrform/current:/usr/share/nginx/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
