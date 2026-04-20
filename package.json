@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test-api": "node test-api.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -15,11 +16,12 @@
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "@zxing/browser": "^0.1.5",
+    "@zxing/library": "^0.21.0",
+    "axios": "^1.13.6",
     "framer-motion": "^12.23.22",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4",
-    "@zxing/library": "^0.21.0"
+    "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

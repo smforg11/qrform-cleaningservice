@@ -1,4 +1,4 @@
-name: Auto Deploy Zero Downtime
+name: Auto Deploy React
 
 on:
   push:
@@ -10,9 +10,10 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Set variables
+      - name: Set Variables
         run: |
           PROJECT_DIR=/home/itdev/qrform
           RELEASES_DIR=$PROJECT_DIR/releases
@@ -23,30 +24,26 @@ jobs:
           echo "RELEASES_DIR=$RELEASES_DIR" >> $GITHUB_ENV
           echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
 
-      - name: Create release folder
-        run: |
-          mkdir -p $NEW_RELEASE
-          rsync -a --exclude='.git' ./ $NEW_RELEASE/
+      - name: Create Release Folder
+        run: mkdir -p ${{ env.NEW_RELEASE }}
 
-      - name: Build Docker Image
+      - name: Install & Build
         run: |
-          cd $NEW_RELEASE
-          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-          docker build -t frontend:$TIMESTAMP -t frontend:latest .
+          npm ci
+          npm run build
+          cp -r dist/* ${{ env.NEW_RELEASE }}/
 
-      - name: Switch Symlink
+      - name: Switch Release (Symlink)
         run: |
-          ln -sfn $NEW_RELEASE $PROJECT_DIR/current
+          ln -sfn ${{ env.NEW_RELEASE }} ${{ env.PROJECT_DIR }}/current
 
-      - name: Restart Container
+      - name: Reload Nginx
         run: |
-          cd $PROJECT_DIR/current
-          docker compose up -d --force-recreate
+          cd ${{ env.PROJECT_DIR }}
+          docker compose up -d nginx_proxy
+          docker compose exec nginx_proxy nginx -s reload || true
 
-      - name: Cleanup old releases
+      - name: Cleanup Old Releases
         run: |
-          cd $RELEASES_DIR
-          ls -1dt */ | tail -n +6 | xargs rm -rf || true
-          
-        
-      
+          cd ${{ env.RELEASES_DIR }}
+          ls -1dt */ 2>/dev/null | tail -n +6 | xargs -r rm -rf
