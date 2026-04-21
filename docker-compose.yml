@@ -6,8 +6,10 @@ services:
     image: qrform-app:latest
     restart: unless-stopped
     # Internal port yang bisa diakses oleh service nginx
-    expose:
+    ports:
       - "5174:5174"
+    expose:
+      - "5174"
     networks:
       - qrform-network
 
