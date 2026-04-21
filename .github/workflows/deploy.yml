@@ -1,49 +1,33 @@
-name: Auto Deploy Zero Downtime
+name: CI/CD Release QRForm
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: /home/itdev/qrform
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set Variables
+      - name: Build New Image
         run: |
-          PROJECT_DIR=/home/itdev/qrform
-          RELEASES_DIR=$PROJECT_DIR/releases
-          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-          NEW_RELEASE=$RELEASES_DIR/$TIMESTAMP
+          docker build -t qrform-app:${{ github.sha }} .
+          docker tag qrform-app:${{ github.sha }} qrform-app:latest
 
-          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
-          echo "RELEASES_DIR=$RELEASES_DIR" >> $GITHUB_ENV
-          echo "NEW_RELEASE=$NEW_RELEASE" >> $GITHUB_ENV
-
-      - name: Create Release Folder
-        run: mkdir -p ${{ env.NEW_RELEASE }}
-
-      - name: Install & Build
+      - name: Deploy with Compose
         run: |
-          npm install
-          npm run build
-          cp -r dist/* ${{ env.NEW_RELEASE }}/
-
-      - name: Switch Release (Symlink)
+          # Pastikan file .env diupdate di /home/sandi/qrform
+          echo "APP_VERSION=${{ github.sha }}" > .env
+          
+          # Re-deploy menggunakan docker compose
+          docker compose up -d
+          
+      - name: Housekeeping
         run: |
-          ln -sfn ${{ env.NEW_RELEASE }} ${{ env.PROJECT_DIR }}/current
-
-      - name: Reload Nginx
-        run: |
-          cd ${{ env.PROJECT_DIR }}
-          docker compose up -d nginx_proxy
-          docker compose exec nginx_proxy nginx -s reload || true
-
-      - name: Cleanup Old Releases
-        run: |
-          cd ${{ env.RELEASES_DIR }}
-          ls -1dt */ 2>/dev/null | tail -n +6 | xargs -r rm -rf
+          docker image prune -f

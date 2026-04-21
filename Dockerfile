@@ -1,13 +1,12 @@
+# ... (Tahap build npm run build tetap sama) ...
+
 FROM node:20-alpine
-
 WORKDIR /app
+# Install server sederhana untuk menjalankan file statis
+RUN npm install -g serve
+# Ambil hasil build
+COPY --from=build-stage /app/dist ./dist
 
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
-
-COPY . .
-
-EXPOSE 5173
-
-CMD ["npm", "run", "dev", "--", "--host"]
-
+# Jalankan di port 5174 sesuai keinginan Anda
+EXPOSE 5174
+CMD ["serve", "-s", "dist", "-l", "5174"]
