@@ -2,7 +2,7 @@ name: CI/CD Release QRForm
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -15,19 +15,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Sinkronisasi Kodingan ke Project
+      - name: Sync Project
         run: |
           rsync -avz --delete --exclude '.git' ${{ github.workspace }}/ .
 
-      - name: Build New Image
+      - name: Set ENV Version (tanpa overwrite)
         run: |
-           docker compose up -d --build
+          sed -i '/APP_VERSION/d' .env || true
+          echo "APP_VERSION=${{ github.sha }}" >> .env
 
-      - name: Deploy with Compose
+      - name: Build & Deploy
         run: |
-          echo "APP_VERSION=${{ github.sha }}" > .env
-          docker compose up -d
-          
-      - name: Housekeeping
+          docker compose down
+          docker compose up -d --build
+
+      - name: Cleanup Docker
         run: |
           docker image prune -f
