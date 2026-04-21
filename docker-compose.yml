@@ -1,7 +1,7 @@
 
 services:
   frontend-dev:
-    container_name: react-vite-dev
+    container_name: react-qrform-dev
     image: qrform:${IMAGE_TAG:-latest}
     working_dir: /app
     volumes:
