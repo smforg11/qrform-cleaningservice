@@ -14,7 +14,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        # File default ditarik ke folder internal runner dulu
 
       - name: Sinkronisasi Kodingan ke Project
         run: |
@@ -22,8 +21,7 @@ jobs:
 
       - name: Build New Image
         run: |
-           docker compose build --no-cache
-           docker compose up -d --force-recreate
+           docker compose up -d --build
 
       - name: Deploy with Compose
         run: |

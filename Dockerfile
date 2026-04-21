@@ -1,17 +1,12 @@
-FROM node:20-alpine AS build-stage
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-
 FROM node:20-alpine
+
 WORKDIR /app
 
-RUN npm install -g serve
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
 
-COPY --from=build-stage /app/dist ./dist
+COPY . .
 
 EXPOSE 5174
-CMD ["serve", "-s", "dist", "-l", "5174"]
+
+CMD ["npm", "run", "dev", "--", "--host"]
