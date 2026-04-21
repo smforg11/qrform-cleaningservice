@@ -16,7 +16,6 @@
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
     "@zxing/browser": "^0.1.5",
-    "@zxing/library": "^0.21.0",
     "axios": "^1.13.6",
     "framer-motion": "^12.23.22",
     "react": "^19.1.1",
