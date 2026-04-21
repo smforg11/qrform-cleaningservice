@@ -3,7 +3,7 @@ version: "3.9"
 services:
   frontend:
     container_name: qrform-app
-    image: frontend:${APP_VERSION:-latest}
+    image: qrform-app:latest
     restart: unless-stopped
     # Internal port yang bisa diakses oleh service nginx
     expose:

@@ -22,8 +22,7 @@ jobs:
 
       - name: Build New Image
         run: |
-          docker build -t qrform-app:${{ github.sha }} .
-          docker tag qrform-app:${{ github.sha }} qrform-app:latest
+           docker compose up -d --build
 
       - name: Deploy with Compose
         run: |
