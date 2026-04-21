@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        # File default ditarik ke folder internal runner dulu
+
+      - name: Sinkronisasi Kodingan ke Project
+        run: |
+          rsync -avz --delete --exclude '.git' ${{ github.workspace }}/ .
 
       - name: Build New Image
         run: |
@@ -22,10 +27,7 @@ jobs:
 
       - name: Deploy with Compose
         run: |
-          # Pastikan file .env diupdate di /home/sandi/qrform
           echo "APP_VERSION=${{ github.sha }}" > .env
-          
-          # Re-deploy menggunakan docker compose
           docker compose up -d
           
       - name: Housekeeping
