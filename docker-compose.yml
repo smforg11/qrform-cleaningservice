@@ -2,7 +2,7 @@
 services:
   frontend-dev:
     container_name: react-vite-dev
-    image: node:20
+    image: qrform:${IMAGE_TAG:-latest}
     working_dir: /app
     volumes:
       - .:/app
