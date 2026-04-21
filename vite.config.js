@@ -1,30 +1,29 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzwvSrKaCPw1kvD0ENwUpuGzLZRULOvJAxHVK7uoDN3UMQtavFasHfuaUgiU0FZebnj-w/exec'
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd())
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    host: true,
-    allowedHosts: ['qrform.smfenterprise.com', 'www.qrform.smfenterprise.com'],
-    proxy: {
-      '/api': {
-        target: SCRIPT_URL,
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-      "/api-n8n": {
-        target: "https://n8n.sarana.id/webhook/9bfbf73a-5c39-47f9-85c4-ba5f4bb2ee0c",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api-n8n/, ""),
+  return {
+    plugins: [react()],
+
+    server: {
+      host: true,
+      allowedHosts: ['qrform.smfenterprise.com', 'www.qrform.smfenterprise.com'],
+      proxy: {
+        '/api': {
+          target: env.VITE_API_TARGET,
+          changeOrigin: true,
+          secure: false,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
       },
     },
-  },
-   rollupOptions: {
-      external: ["@zxing/library"],
+
+    build: {
+      rollupOptions: {
+        external: ['@zxing/library'],
+      },
     },
+  }
 })
