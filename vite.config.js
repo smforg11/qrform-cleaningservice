@@ -6,16 +6,30 @@ const SCRIPT_URL =
 
 export default defineConfig({
   plugins: [react()],
+
+  // 🔥 FIX ZXING / dependency build issue
+  optimizeDeps: {
+    include: ['@zxing/library']
+  },
+
+  build: {
+    commonjsOptions: {
+      include: [/zxing/]
+    }
+  },
+
+  // 🌐 DEV SERVER ONLY
   server: {
     host: true,
     allowedHosts: ['qrform.smfenterprise.com', 'www.qrform.smfenterprise.com'],
+
     proxy: {
       '/api': {
         target: SCRIPT_URL,
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
