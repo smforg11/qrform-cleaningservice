@@ -138,8 +138,8 @@ export default function ChatWidget() {
             <img
               src="/cs.png"
               style={{
-                width: 28,
-                height: 28,
+                width: 35,
+                height: 35,
                 borderRadius: "50%"
               }}
             />
@@ -151,7 +151,7 @@ export default function ChatWidget() {
                 letterSpacing: 0.3
               }}
             >
-              Assistant AI KEBERSIHANn SMF
+              Assistant AI SMF
             </Typography>
           </Box>
         {/* Messages */}
