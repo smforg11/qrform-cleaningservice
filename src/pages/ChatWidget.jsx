@@ -151,7 +151,7 @@ export default function ChatWidget() {
                 letterSpacing: 0.3
               }}
             >
-              Assistant AI SMF
+              AI Analisis SMF
             </Typography>
           </Box>
         {/* Messages */}
