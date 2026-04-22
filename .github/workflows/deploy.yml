@@ -13,24 +13,18 @@ jobs:
         working-directory: ${{ github.workspace }}
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Code ke runner
         uses: actions/checkout@v4
 
-      - name: Set Image Tag
-        run: echo "IMAGE_TAG=${{ github.sha }}" >> $GITHUB_ENV
+      - name: Set Image Tag (date)
+        run: echo "IMAGE_TAG=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
 
-      - name: Build Docker Image
+      - name: Build Docker Image 
         run: |
           docker build \
             -t qrform:latest \
             -t qrform:${IMAGE_TAG} .
 
-      - name: Stop Old Container
-        run: docker compose down || true
-
-      - name: Run New Container (pakai version)
+      - name: Run container baru
         run: |
           IMAGE_TAG=${IMAGE_TAG} docker compose up -d
-
-      - name: Cleanup unused images
-        run: docker image prune -f
