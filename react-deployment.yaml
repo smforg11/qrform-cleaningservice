@@ -12,9 +12,12 @@ spec:
       labels:
         app: react
     spec:
+      # Tambahkan bagian ini untuk otentikasi GHCR
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
-      - name: react
-        image: cbgstr1203/react-app:v1
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5173
+        - name: react
+          image: ghcr.io/smforg11/qr-form:20260904-094845
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5173
