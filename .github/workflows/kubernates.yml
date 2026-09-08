@@ -1,5 +1,5 @@
 name: Deploy Production FBSV2 to Kubernetes
-##
+
 on:
   push:
     branches: ["main"]
@@ -67,8 +67,14 @@ jobs:
         env:
           KUBECONFIG: /home/itdev/.kube/config
         run: |
-          $KUBECTL get pods -l app=${IMAGE_NAME} -o wide || true
-          $KUBECTL describe deployment/${DEPLOYMENT} | tail -30 || true
+          echo "=== STATUS PODS ==="
+          $KUBECTL get pods -l app=react -o wide || true
+          
+          echo "=== DETAIL POD TERAKHIR ==="
+          $KUBECTL describe pods -l app=react || true
+          
+          echo "=== LOG CONTAINER ==="
+          $KUBECTL logs -l app=react --tail=50 || true
 
       - name: Hapus image lama di Runner
         if: always()
